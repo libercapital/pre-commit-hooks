@@ -6,7 +6,7 @@ virtual_env:
 	python3 -m venv $(VENV)
 
 install: virtual_env
-	 $(PIP) install -r requirements.txt
+	 $(PIP) install -r requirements-dev.txt
 
 run_test:
 	${PYTHON} -m pytest --cov=hooks test/

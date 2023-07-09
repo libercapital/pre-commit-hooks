@@ -21,7 +21,7 @@ usando o comando:
 make build 
  ```
 Será criado um virtualenv na pasta chamada  **_venv_** e instalado todas as dependências contidas em
-[requirements.txt](requirements.txt)
+[requirements.txt](requirements-dev.txt)
 
 
 ### Hooks

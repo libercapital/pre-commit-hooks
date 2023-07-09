@@ -2,9 +2,10 @@
 Script para validar nome da branch.
 Ver documentação em https://pre-commit.com/#intro
 """
-from os import getenv
 import re
+from os import getenv
 
+from hooks.util import cmd_output
 
 BRANCH_REGEX = r"^(((feature|task|hotfix|bugfix))" \
                r"(\/)([A-Z]{2,}-[0-9]+))|((test)(\/)(.+))|" \
@@ -16,8 +17,11 @@ def get_branch_name() -> str:
     Recupera nome da branch corrente
     :return: nome da branch
     """
-    remote_branch_name = getenv("PRE_COMMIT_REMOTE_BRANCH")
-    return remote_branch_name.split("refs/heads/")[1]
+    if getenv("PRE_COMMIT_REMOTE_BRANCH", None):
+        name = getenv("PRE_COMMIT_REMOTE_BRANCH")
+        return name.split("refs/heads/")[1].strip()
+
+    return cmd_output("git", "branch", "--show-current")
 
 
 def is_valid_branch_name(name: str) -> bool:

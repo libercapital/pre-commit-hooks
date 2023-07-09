@@ -9,7 +9,7 @@ install: virtual_env
 	 $(PIP) install -r requirements.txt
 
 run_test:
-	${PYTHON} -m pytest --cov=hooks test/
+	${PYTHON} -m pytest --cov-fail-under=90 --cov=hooks test/
 
 lint:
 	${PYTHON} -m flake8 hooks

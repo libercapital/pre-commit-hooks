@@ -15,14 +15,17 @@ São bibliotecas personalisadas que são usados em conjuto com [pre-commit](http
 
 ### Buiild
 
-O projeto contem um MakeFile que pode ser usado para configurar o projeto.
-usando o comando:
+O projeto contem um MakeFile que pode ser usado para configurar usando o comando:
 ```
 make build 
  ```
-Será criado um virtualenv na pasta chamada  **_venv_** e instalado todas as dependências contidas em
-[requirements.txt](requirements.txt)
+Esse comando executa as seguintes etapas
 
+ - Criar um virtual virtualenv
+ - Instala as dependências contidas em [requirements.txt](requirements.txt)
+ - Executa o flake8
+ - Executa pylint
+ - Executa os testes unitários ( Cobertura aceitável > 90%)
 
 ### Hooks
 #### prepare-commit-msg

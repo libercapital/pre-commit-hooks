@@ -15,7 +15,7 @@ lint:
 	${PYTHON} -m flake8 hooks
 	${PYTHON} -m pylint hooks
 
-build: clean install
+build: clean install pre-commit
 	make lint
 	make run_test
 
@@ -26,4 +26,9 @@ clean:
 	rm -rf __pycache__
 	rm -rf $(VENV)
 
-.PHONY: virtual_env install run_test lint prepre clean
+pre-commit:
+	pre-commit clean
+	pre-commit install -t prepare-commit-msg -t pre-push
+	pre-commit autoupdate
+
+.PHONY: virtual_env install run_test lint prepre clean pre-commit

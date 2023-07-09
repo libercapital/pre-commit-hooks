@@ -1,0 +1,12 @@
+- id: commit_msg
+  name: Validar mensagem do commit
+  entry: commit_msg
+  language: python
+  stages: [ prepare-commit-msg ]
+
+- id: branch_name
+  name: Validar nome da branch
+  entry: branch_name
+  language: python
+  pass_filenames: false
+  stages: [ pre-push ]

@@ -21,6 +21,7 @@ def cmd_output(*cmd: str, retcode: int | None = 0, **kwargs: Any) -> str:
     kwargs.setdefault('stderr', subprocess.PIPE)
     with Popen(cmd, **kwargs) as proc:
         stdout, stderr = proc.communicate()
+        stdout = stdout.decode()
         if retcode is not None and proc.returncode != retcode:
             raise CalledProcessError(cmd, retcode,
                                      proc.returncode,

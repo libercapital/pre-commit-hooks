@@ -21,7 +21,9 @@ def get_branch_name() -> str:
         name = getenv("PRE_COMMIT_REMOTE_BRANCH")
         return name.split("refs/heads/")[1].strip()
 
-    return cmd_output("git", "branch", "--show-current")
+    return cmd_output("git",
+                      "branch",
+                      "--show-current").strip()
 
 
 def is_valid_branch_name(name: str) -> bool:

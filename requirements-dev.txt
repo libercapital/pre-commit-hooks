@@ -1,0 +1,6 @@
+pytest
+pytest-mock
+setuptools
+flake8
+pylint
+pytest-cov

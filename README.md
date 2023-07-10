@@ -58,7 +58,7 @@ Para instalar  é preciso adicionar o comando _**-t prepare-commit-msg**_ ao exe
 
 
 
-#### prepare-commit-msg
+#### commit_msg
 Esse hook será executando no git stage [pre_push](https://git-scm.com/docs/githooks#_pre_push) e fará
 a validação da branch ao executar o comando **_git push_**.
 

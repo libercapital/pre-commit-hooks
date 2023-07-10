@@ -32,4 +32,4 @@ jobs:
          pylint hooks
     - name: Test with pytest
       run: |
-        pytest --cov=hooks test/
+        pytest --cov-fail-under=90 --cov=hooks test/

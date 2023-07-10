@@ -8,7 +8,7 @@ import re
 import sys
 
 COMMIT_REGEX = \
-    r"^(feat|fix|refactor|perf|test|chore|docs|style|build|ci)" \
+    r"^(feat|fix|refactor|perf|test|chore|docs|style|build|ci|merge|revert)" \
     r"\([A-Z]{2,}-[0-9]+\): .+$"
 
 

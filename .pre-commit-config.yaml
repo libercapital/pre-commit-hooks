@@ -2,5 +2,4 @@ repos:
 -   repo: https://github.com/libercapital/pre-commit-hooks
     rev:  b26fbfd330c960968873c75077bfb41e837ad0e7
     hooks:
-    -   id: commit_msg
     -   id: branch_name

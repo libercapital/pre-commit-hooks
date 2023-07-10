@@ -13,7 +13,7 @@ class CalledProcessError(RuntimeError):
     """
 
 
-def cmd_output(*cmd: str, code: int | None = 0, **kwargs: Any) -> str:
+def cmd_output(*cmd: str, retcode: int | None = 0, **kwargs: Any) -> str:
     """
     Executa comando script
     """
@@ -21,16 +21,8 @@ def cmd_output(*cmd: str, code: int | None = 0, **kwargs: Any) -> str:
     kwargs.setdefault('stderr', subprocess.PIPE)
     with Popen(cmd, **kwargs) as proc:
         stdout, stderr = proc.communicate()
-        proc.wait(5000)
-
-        if stderr is not None:
-            raise CalledProcessError(cmd, code,
+        if retcode is not None and proc.returncode != retcode:
+            raise CalledProcessError(cmd, retcode,
                                      proc.returncode,
                                      stdout, stderr)
-
-        if code != 0 & proc.returncode != code:
-            raise CalledProcessError(cmd, code,
-                                     proc.returncode,
-                                     stdout, stderr)
-
         return stdout

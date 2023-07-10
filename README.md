@@ -98,3 +98,29 @@ Branch naming:
 **Test**: _É para experimentar algo fora de uma issue/ticket._
 
     test/nome-do-teste
+
+
+### Instalando no projeto
+
+Para a utilização será preciso instalar localamente:
+
+- python 3 
+- pip
+- [pre-commit](https://pre-commit.com/)
+
+Criar no projeto um arquivo com nome **.pre-commit-config.yaml**  na raiz do projeto com conteúdo:
+
+````
+repos:
+-   repo: https://github.com/libercapital/pre-commit-hooks
+    rev:  v1.0.0
+    hooks:
+    -   id: commit_msg
+    -   id: branch_name
+````
+
+Executar o comado na raiz no projeto:
+
+````
+pre-commit install -t prepare-commit-msg -t pre-push
+````

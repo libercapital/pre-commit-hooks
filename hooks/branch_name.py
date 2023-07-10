@@ -19,7 +19,9 @@ def get_branch_name() -> str:
     """
     if getenv("PRE_COMMIT_REMOTE_BRANCH", None):
         name = getenv("PRE_COMMIT_REMOTE_BRANCH")
-        return name.split("refs/heads/")[1].strip()
+        if name.startswith("refs/heads/"):
+            return name.split("refs/heads/")[1].strip()
+        return name
 
     return cmd_output("git",
                       "branch",

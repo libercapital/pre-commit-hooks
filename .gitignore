@@ -28,4 +28,4 @@ venv
 venv3
 
 #test
-test/resources/test_white_commit.txt
+test/resources/test_white*

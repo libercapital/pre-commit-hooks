@@ -28,7 +28,7 @@ jobs:
         pre-commit install -t prepare-commit-msg -t pre-push
     - name: Check branch name
       run: |
-        pre-commit run --hook-stage pre-push
+        PRE_COMMIT_REMOTE_BRANCH=${{ github.head_ref }} pre-commit run --hook-stage pre-push --all-files
     - name: Lint with flake8
       run: |
         flake8 hooks

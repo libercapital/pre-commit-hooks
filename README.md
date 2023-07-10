@@ -26,6 +26,7 @@ Esse comando executa as seguintes etapas
  - Executa o flake8
  - Executa pylint
  - Executa os testes unitários ( Cobertura aceitável > 90%)
+ - Instala o pre-commit 
 
 ### Hooks
 #### prepare-commit-msg

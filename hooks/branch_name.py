@@ -5,14 +5,13 @@ Ver documentação em https://pre-commit.com/#intro
 import re
 from os import getenv
 
-from hooks.util import cmd_output
 
 BRANCH_REGEX = r"^(((feature|task|hotfix|bugfix))" \
                r"(\/)([A-Z]{2,}-[0-9]+))|((test)(\/)(.+))|" \
                r"(main|developer)|(release|test)(\/).+"
 
 
-def get_branch_name() -> str:
+def get_remot_branch_name() -> str:
     """
     Recupera nome da branch corrente
     :return: nome da branch
@@ -23,9 +22,7 @@ def get_branch_name() -> str:
             return name.split("refs/heads/")[1].strip()
         return name
 
-    return cmd_output("git",
-                      "branch",
-                      "--show-current").strip()
+    return None
 
 
 def is_valid_branch_name(name: str) -> bool:
@@ -45,9 +42,18 @@ def main() -> int:
     :param:
     :return: 0 - executado com successo | 1- erro ao executar
     """
-    branch_name = get_branch_name()
+    branch_name = get_remot_branch_name()
+
+    if branch_name is None:
+        print("Essa branch não tem uma branch remota associada")
+        print("Execute o seguinte comando antes e tente novamente")
+        print("")
+        print("git branch -u <remote/branch name>")
+        return 1
+
     if is_valid_branch_name(branch_name):
         return 0
+
     print("Erro ao ao validar branch")
     print(branch_name)
     print('Nome da branch não corresponde ao padrão.')

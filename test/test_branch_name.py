@@ -46,10 +46,10 @@ def test_invalid_branch_name(name: str):
     ],
 )
 def test_get_branch_name_env_res(name: str):
-    with patch("hooks.branch_name.getenv") as cmd_output:
-        cmd_output.return_value = name
-        cmd_output.call_args = "PRE_COMMIT_REMOTE_BRANCH"
-        assert name.split("refs/heads/")[1] == branch_name.get_branch_name()
+    with patch("hooks.branch_name.getenv") as mock_env:
+        mock_env.return_value = name
+        mock_env.call_args = "PRE_COMMIT_REMOTE_BRANCH"
+        assert name.split("refs/heads/")[1] == branch_name.get_remot_branch_name()
 
 
 
@@ -64,34 +64,18 @@ def test_get_branch_name_env_res(name: str):
     ],
 )
 def test_get_branch_name_env(name: str):
-    with patch("hooks.branch_name.getenv") as cmd_output:
-        cmd_output.return_value = name
-        cmd_output.call_args = "PRE_COMMIT_REMOTE_BRANCH"
-        assert  name == branch_name.get_branch_name()
+    with patch("hooks.branch_name.getenv") as mock_env:
+        mock_env.return_value = name
+        mock_env.call_args = "PRE_COMMIT_REMOTE_BRANCH"
+        assert name == branch_name.get_remot_branch_name()
 
 
-@pytest.mark.parametrize(
-    "name", [
-        ("feature/RSS-13-novo-campo"),
-        ("task/RSS-13-novo-campo"),
-        ("hotfix/RSS-13-corrigir-campo"),
-        ("bugfix/RSS-13-corrigir-campo"),
-        ("test/nome-do test"),
-        ("release/v1.0.1")
-    ],
-)
-def test_get_branch_name_git(name: str):
-    with patch("hooks.branch_name.getenv") as local_env:
-        local_env.return_value = None
-        local_env.call_args = "PRE_COMMIT_REMOTE_BRANCH"
 
-        with patch("hooks.branch_name.cmd_output") as cmd_output:
-            cmd_output.return_value = name
-            cmd_output.call_args_list = ["git", "branch", "--show-current"]
-
-            assert name == branch_name.get_branch_name()
-
-
+def test_get_branch_name_env_none():
+    with patch("hooks.branch_name.getenv") as mock_env:
+        mock_env.return_value = None
+        mock_env.call_args = "PRE_COMMIT_REMOTE_BRANCH"
+        assert branch_name.get_remot_branch_name() is None
 
 @pytest.mark.parametrize(
     "name", [
@@ -106,9 +90,9 @@ def test_get_branch_name_git(name: str):
     ],
 )
 def test_main(name: str):
-    with patch("hooks.branch_name.getenv") as cmd_output:
-        cmd_output.return_value = name
-        cmd_output.call_args = "PRE_COMMIT_REMOTE_BRANCH"
+    with patch("hooks.branch_name.getenv") as mock_env:
+        mock_env.return_value = name
+        mock_env.call_args = "PRE_COMMIT_REMOTE_BRANCH"
         assert branch_name.main() == 0
 
 
@@ -121,8 +105,15 @@ def test_main(name: str):
         ("refs/heads/test-nome-do test")
     ],
 )
-def test_main_error(name: str):
-    with patch("hooks.branch_name.getenv") as cmd_output:
-        cmd_output.return_value = name
-        cmd_output.call_args = "PRE_COMMIT_REMOTE_BRANCH"
+def test_main_invalid_branch(name: str):
+    with patch("hooks.branch_name.getenv") as mock_env:
+        mock_env.return_value = name
+        mock_env.call_args = "PRE_COMMIT_REMOTE_BRANCH"
+        assert branch_name.main() == 1
+
+
+def test_main_no_remote_branch():
+    with patch("hooks.branch_name.getenv") as mock_env:
+        mock_env.return_value = None
+        mock_env.call_args = "PRE_COMMIT_REMOTE_BRANCH"
         assert branch_name.main() == 1

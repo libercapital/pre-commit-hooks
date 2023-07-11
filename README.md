@@ -113,7 +113,7 @@ Criar no projeto um arquivo com nome **.pre-commit-config.yaml**  na raiz do pro
 ````
 repos:
 -   repo: https://github.com/libercapital/pre-commit-hooks
-    rev:  v1.0.0
+    rev:  v1.0.1
     hooks:
     -   id: commit_msg
     -   id: branch_name

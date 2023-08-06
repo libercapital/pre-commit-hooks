@@ -1,6 +1,6 @@
-VENV = venv
+VENV = env
 PYTHON = $(VENV)/bin/python3
-PIP = $(VENV)/bin/pip
+PIP = $(VENV)/bin/pip3
 
 virtual_env:
 	python3 -m venv $(VENV)

@@ -7,9 +7,10 @@ from __future__ import annotations
 import re
 import sys
 
-COMMIT_REGEX = \
-    r"^(feat|fix|refactor|perf|test|chore|docs|style|build|ci|merge|revert)" \
-    r"\([A-Z]{2,}-[0-9]+\): .+$"
+COMMIT_REGEX = (r"(^Revert .+$|^Merge .+$)|"
+                r"(^(feat|fix|refactor|perf|test|chore|docs"
+                r"|style|build|ci|merge|revert)"
+                r"\([A-Z]{2,}-[0-9]+\): .+$)")
 
 
 def read_commit(commit_msg_filepath: str) -> str:

@@ -1,8 +1,11 @@
 name: Python application
 
 on:
-  push:
+  pull_request:
     branches: [ "main" ]
+
+permissions:
+  contents: read
 
 jobs:
   code:
@@ -42,22 +45,3 @@ jobs:
     - name: Test with pytest
       run: |
         pytest --cov=hooks test/
-  release:
-    needs:
-      - test
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: 'lts/*'
-      - name: Setup
-        run: npm install -g   @semantic-release/git @semantic-release/changelog -D
-      - name: Release
-        env:
-          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
-        run: npx semantic-release

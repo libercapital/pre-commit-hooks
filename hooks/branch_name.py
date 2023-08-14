@@ -6,9 +6,10 @@ import re
 from os import getenv
 
 
-BRANCH_REGEX = r"^(((feature|task|hotfix|bugfix))" \
-               r"(\/)([A-Z]{2,}-[0-9]+))|((test)(\/)(.+))|" \
-               r"(main|developer)|(release|test)(\/).+"
+BRANCH_REGEX = (r"^(((feature|task|hotfix|bug))"
+                r"(\/)(.+))"
+                r"|((test)(\/)(.+))"
+                r"|(main|developer|release)")
 
 
 def get_remot_branch_name() -> str:

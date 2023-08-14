@@ -10,9 +10,9 @@ from hooks import branch_name
         ("feature/RSS-13-novo-campo"),
         ("task/RSS-13-novo-campo"),
         ("hotfix/RSS-13-corrigir-campo"),
-        ("bugfix/RSS-13-corrigir-campo"),
+        ("bug/RSS-13-corrigir-campo"),
         ("test/nome-do test"),
-        ("release/v1.0.1"),
+        ("release"),
         ("main"),
         ("developer")
     ],
@@ -25,7 +25,7 @@ def test_valid_branch_name(name: str):
     "name", [
         ("RSS-13-novo-campo"),
         ("task/"),
-        ("hotfix/RSS"),
+        ("hot/RSS"),
         ("bugfix/RSS-corrigir-campo"),
         ("test-nome-do test"),
         ("")
@@ -82,7 +82,7 @@ def test_get_branch_name_env_none():
         ("refs/heads/feature/RSS-13-novo-campo"),
         ("refs/heads/task/RSS-13-novo-campo"),
         ("refs/heads/hotfix/RSS-13-corrigir-campo"),
-        ("refs/heads/bugfix/RSS-13-corrigir-campo"),
+        ("refs/heads/bug/RSS-13-corrigir-campo"),
         ("refs/heads/test/nome-do test"),
         ("refs/heads/release/v1.0.1"),
         ("refs/heads/main"),
@@ -100,7 +100,7 @@ def test_main(name: str):
     "name", [
         ("refs/heads/RSS-13-novo-campo"),
         ("refs/heads/task/"),
-        ("refs/heads/hotfix/RSS"),
+        ("refs/heads/hot/RSS"),
         ("refs/heads/bugfix/RSS-corrigir-campo"),
         ("refs/heads/test-nome-do test")
     ],

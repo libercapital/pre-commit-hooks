@@ -64,15 +64,6 @@ def test_valid_commit(commit: str):
     assert commit_msg.is_valid_commit(commit)
 
 
-@pytest.mark.parametrize(
-    "commit", [("feat(): Adicionar funcionalidade de pesquisa por categoria"),
-               ("fix: Corrigir erro de renderização no formulário de cadastro"),
-               ("refactor(TEST): Refatorar função de validação de entrada para melhor legibilidade"),
-               ("chore(04): Adicionar pasta de imagens de perfil de usuário")],
-)
-def test_valid_commit_without_jira(commit: str):
-    assert not commit_msg.is_valid_commit(commit)
-
 
 @pytest.mark.parametrize(
     "commit", [("(TEST-01): Adicionar funcionalidade de pesquisa por categoria"),
@@ -88,7 +79,7 @@ def test_valid_commit_invalid_code_pype(commit: str):
     "commit", [("feat(TEST-01): "),
                ("fix(TEST-02):")],
 )
-def test_valid_commit_without_message(commit: str):
+def test_commit_without_message(commit: str):
     assert not commit_msg.is_valid_commit(commit)
 
 

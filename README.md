@@ -68,11 +68,21 @@ Para instalar  é preciso adicionar o comando _**-t pre-push**_ ao executar o co
 
 Branch naming:
 
+**Main:**
+
+
+    main
+
+
 **Release:**
 
-    release/(versão)
-    release/v1.0.1
 
+    release
+
+**development:**
+
+
+    development
 
 **Feature**: _É para adicionar, refatorar ou remover um recurso._
 
@@ -92,8 +102,8 @@ Branch naming:
 
 **BugFix**: _É para corrigir um bug_
 
-    bugfix/(jira)-titulo
-    bugfix/RSS-13-corrigir-campo
+    bug/(jira)-titulo
+    bug/RSS-13-corrigir-campo
 
 **Test**: _É para experimentar algo fora de uma issue/ticket._
 
@@ -113,7 +123,7 @@ Criar no projeto um arquivo com nome **.pre-commit-config.yaml**  na raiz do pro
 ````
 repos:
 -   repo: https://github.com/libercapital/pre-commit-hooks
-    rev:  v1.0.1
+    rev:  v1.0.0
     hooks:
     -   id: commit_msg
     -   id: branch_name

@@ -1,6 +1,6 @@
 repos:
 -   repo: https://github.com/libercapital/pre-commit-hooks
-    rev:  v1.1.0
+    rev:  v1.0.0
     hooks:
     -   id: commit_msg
     -   id: branch_name

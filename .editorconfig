@@ -19,11 +19,10 @@ insert_final_newline = true
 [*.md]
 trim_trailing_whitespace = false
 
-# 4 space indentation
-[*.{py,java,r,R}]
-indent_style = space
-indent_size = 4
-
 [{Makefile,**.mk}]
 # Use tabs for indentation (Makefiles require tabs)
 indent_style = tab
+
+[*.{py,java,r,R}]
+indent_style = space
+indent_size = 4

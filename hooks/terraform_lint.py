@@ -8,11 +8,16 @@ Script para validar os resources do terraform
 """
 from __future__ import annotations
 
-import sys
 import subprocess
+import sys
+
 
 def checkov_is_valid(path: str) -> bool:
-    result = subprocess.run(["checkov", "-d", path], capture_output=True)
+    result = subprocess.run([
+        "checkov",
+        "-d",
+        path
+    ], capture_output=True)
     if result.returncode == 0:
         return True
 
@@ -21,7 +26,12 @@ def checkov_is_valid(path: str) -> bool:
 
 
 def terraform_init(path: str) -> bool:
-    result = subprocess.run(["terraform", "-chdir=" + path, "init", "-backend=false"], capture_output=True)
+    result = subprocess.run([
+        "terraform",
+        "-chdir=" + path,
+        "init",
+        "-backend=false"
+    ], capture_output=True)
     if result.returncode == 0:
         return True
 
@@ -30,7 +40,13 @@ def terraform_init(path: str) -> bool:
 
 
 def terraform_fmt_is_valid(path: str) -> bool:
-    result = subprocess.run(["terraform", "-chdir=" + path, "fmt", "-diff", "-check"], capture_output=True)
+    result = subprocess.run([
+        "terraform",
+        "-chdir=" + path,
+        "fmt",
+        "-diff",
+        "-check"
+    ], capture_output=True)
     if result.returncode == 0:
         return True
 
@@ -39,7 +55,11 @@ def terraform_fmt_is_valid(path: str) -> bool:
 
 
 def terraform_validate_is_valid(path: str) -> bool:
-    result = subprocess.run(["terraform", "-chdir=" + path, "validate"], capture_output=True)
+    result = subprocess.run([
+        "terraform",
+        "-chdir=" + path,
+        "validate"
+    ], capture_output=True)
     if result.returncode == 0:
         return True
 
@@ -48,7 +68,11 @@ def terraform_validate_is_valid(path: str) -> bool:
 
 
 def tflint_init(path: str) -> bool:
-    result = subprocess.run(["tflint", "--chdir=" + path, "--init"], capture_output=True)
+    result = subprocess.run([
+        "tflint",
+        "--chdir=" + path,
+        "--init"
+    ], capture_output=True)
     if result.returncode == 0:
         return True
 
@@ -57,7 +81,10 @@ def tflint_init(path: str) -> bool:
 
 
 def tflint_is_valid(path: str) -> bool:
-    result = subprocess.run(["tflint", "--chdir=" + path], capture_output=True)
+    result = subprocess.run([
+        "tflint",
+        "--chdir=" + path
+    ], capture_output=True)
     if result.returncode == 0:
         return True
 

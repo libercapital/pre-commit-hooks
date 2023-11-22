@@ -1,3 +1,10 @@
+## [1.0.1](https://github.com/libercapital/pre-commit-hooks/compare/v1.0.0...v1.0.1) (2023-11-22)
+
+
+### Bug Fixes
+
+* **SRE-408:** fix wrong commands outputs ([bd28bf3](https://github.com/libercapital/pre-commit-hooks/commit/bd28bf3e28d5f7d3e2ece5ec29c15fe247405ece))
+
 # 1.0.0 (2023-08-14)
 
 

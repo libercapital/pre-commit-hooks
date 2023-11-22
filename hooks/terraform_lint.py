@@ -13,105 +13,125 @@ import sys
 
 
 def checkov_is_valid(path: str) -> bool:
+    """Executa checkov para validar os resources do terraform"""
+
+    print("Validando os resources do terraform com checkov")
     result = subprocess.run([
         "checkov",
         "-d",
         path
-    ], capture_output=True)
+    ], capture_output=True, check=False)
     if result.returncode == 0:
         return True
 
     print(result.stdout.decode("utf-8"))
-    return False
+    print(result.stderr.decode("utf-8"))
+    sys.exit(1)
 
 
 def terraform_init(path: str) -> bool:
+    """Executa terraform init para inicializar o projeto"""
+
+    print("Inicializando terraform init")
     result = subprocess.run([
         "terraform",
         "-chdir=" + path,
         "init",
         "-backend=false"
-    ], capture_output=True)
+    ], capture_output=True, check=False)
     if result.returncode == 0:
         return True
 
     print(result.stdout.decode("utf-8"))
-    return False
+    print(result.stderr.decode("utf-8"))
+    sys.exit(1)
 
 
 def terraform_fmt_is_valid(path: str) -> bool:
+    """Executa terraform fmt para validar o formato dos arquivos"""
+
+    print("Validando formatação dos conteúdos")
     result = subprocess.run([
         "terraform",
         "-chdir=" + path,
         "fmt",
         "-diff",
         "-check"
-    ], capture_output=True)
+    ], capture_output=True, check=False)
     if result.returncode == 0:
         return True
 
     print(result.stdout.decode("utf-8"))
-    return False
+    print(result.stderr.decode("utf-8"))
+    sys.exit(1)
 
 
 def terraform_validate_is_valid(path: str) -> bool:
+    """Executa terraform validate para validar os arquivos"""
+
+    print("Validando estrutura do terraform")
     result = subprocess.run([
         "terraform",
         "-chdir=" + path,
         "validate"
-    ], capture_output=True)
+    ], capture_output=True, check=False)
     if result.returncode == 0:
         return True
 
     print(result.stdout.decode("utf-8"))
-    return False
+    print(result.stderr.decode("utf-8"))
+    sys.exit(1)
 
 
 def tflint_init(path: str) -> bool:
+    """Executa tflint init para inicializar o projeto"""
+
+    print("Inicializando tflint")
     result = subprocess.run([
         "tflint",
         "--chdir=" + path,
         "--init"
-    ], capture_output=True)
+    ], capture_output=True, check=False)
     if result.returncode == 0:
         return True
 
     print(result.stdout.decode("utf-8"))
-    return False
+    print(result.stderr.decode("utf-8"))
+    sys.exit(1)
 
 
 def tflint_is_valid(path: str) -> bool:
+    """Executa tflint para validar os arquivos"""
+
+    print("Validando conteúdo com tflint")
     result = subprocess.run([
         "tflint",
         "--chdir=" + path
-    ], capture_output=True)
+    ], capture_output=True, check=False)
     if result.returncode == 0:
         return True
 
     print(result.stdout.decode("utf-8"))
-    return False
+    print(result.stderr.decode("utf-8"))
+    sys.exit(1)
 
 
 def main() -> int:
-    path = sys.argv[1] or "terraform"
+    """Executa os comandos para validar os resources do terraform"""
 
-    if not terraform_init(path):
-        return 1
+    path = "terraform"
+    if len(sys.argv) > 1:
+        path = sys.argv[1]
 
-    if not checkov_is_valid(path):
-        return 1
+    print("Terraform Lint")
+    print("path: " + path)
 
-    if not terraform_validate_is_valid(path):
-        return 1
-
-    if not terraform_fmt_is_valid(path):
-        return 1
-
-    if not tflint_init(path):
-        return 1
-
-    if not tflint_is_valid(path):
-        return 1
+    terraform_init(path)
+    checkov_is_valid(path)
+    terraform_validate_is_valid(path)
+    terraform_fmt_is_valid(path)
+    tflint_init(path)
+    tflint_is_valid(path)
 
     return 0
 
